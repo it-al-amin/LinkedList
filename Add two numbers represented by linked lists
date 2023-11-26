@@ -1,0 +1,153 @@
+//{ Driver Code Starts
+// driver
+
+#include <bits/stdc++.h>
+using namespace std;
+
+/* Linked list Node */
+struct Node {
+    int data;
+    struct Node* next;
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+struct Node* buildList(int size)
+{
+    int val;
+    cin>> val;
+    
+    Node* head = new Node(val);
+    Node* tail = head;
+    
+    for(int i=0; i<size-1; i++)
+    {
+        cin>> val;
+        tail->next = new Node(val);
+        tail = tail->next;
+    }
+    
+    return head;
+}
+
+void printList(Node* n)
+{
+    while(n)
+    {
+        cout<< n->data << " ";
+        n = n->next;
+    }
+    cout<< endl;
+}
+
+
+// } Driver Code Ends
+/* node for linked list:
+
+struct Node {
+    int data;
+    struct Node* next;
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
+
+class Solution
+{
+    public:
+    //Function to add two numbers represented by linked list.
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        // code here
+        string x="",y="";
+       struct Node* temp=first;
+        while(temp!=NULL)
+        {
+            x+=temp->data+'0';
+            temp=temp->next;
+        }
+        temp=second;
+        while(temp!=NULL)
+        {
+            y+=temp->data+'0';
+            temp=temp->next;
+        }
+        string z="";
+        int i=x.size()-1,j=y.size()-1;
+        int flag=0,ans;
+       while(i>=0||j>=0)
+        {
+            if(i>=0&&j>=0)
+            {
+                ans=x[i]-'0'+y[j]-'0'+flag;
+                z+=ans%10+'0';
+                flag=ans/10;
+                i--;
+                j--;
+            }
+            else
+            {
+                if(i>=0)
+                {
+                     ans=x[i]-'0'+flag;
+                     z+=ans%10+'0';
+                     flag=ans/10;
+                     i--;
+                 }
+                 else
+                 {
+                     ans=y[j]-'0'+flag;
+                     z+=ans%10+'0';
+                     flag=ans/10;
+                     j--;
+                 }
+            }
+        }
+        while(flag)
+        {
+            z+=flag%10+'0';
+            flag/=10;
+        }
+        i=z.size()-1;
+        temp=new Node(z[i]-'0');
+        i--;
+        struct Node* tail=temp;
+        while(i>=0)
+        {
+            tail->next=new Node(z[i]-'0');
+            tail=tail->next;
+            i--;
+        }
+        return temp;
+    }
+};
+
+
+//{ Driver Code Starts.
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n, m;
+        
+        cin>>n;
+        Node* first = buildList(n);
+        
+        cin>>m;
+        Node* second = buildList(m);
+        Solution ob;
+        Node* res = ob.addTwoLists(first,second);
+        printList(res);
+    }
+    return 0;
+}
+
+// } Driver Code Ends
