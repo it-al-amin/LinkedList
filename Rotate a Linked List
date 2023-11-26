@@ -1,0 +1,49 @@
+class Solution
+{
+    public:
+    //Function to rotate a linked list.
+    Node* rotate(Node* head, int k)
+    {
+        // Your code here
+        int cnt=k;
+        Node* temp=head;
+        Node* temp1=head;
+        Node* tail;
+        while(temp!=NULL)
+        {
+            temp=temp->next;
+            k--;
+            if(k==0)
+            {
+                break;
+            }
+        }
+        if(temp==NULL)//last node indicate then start from 1st to last
+        {
+          return head;  
+        }
+        //cout<<temp->data<<"\n";
+        head=temp;//k+1th node
+        tail=head;
+        temp=temp->next;
+        while(temp!=NULL)//ok update tail upto last one
+        {
+            tail=tail->next;
+            temp=temp->next;
+        }
+        //cout<<tail->data<<"\n";
+        //tail->next=temp1;
+        //tail=tail->next;
+        //cout<<tail->data<<"\n";
+        while(cnt)//add 1st to kth node and updated with tail 
+        {
+            cnt--;
+            tail->next=new Node(temp1->data);
+            temp1=temp1->next;
+            tail=tail->next;
+        }
+        //cout<<tail->data<<"\n";
+        return head;
+        
+    }
+};
