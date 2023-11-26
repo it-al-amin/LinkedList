@@ -1,0 +1,118 @@
+//{ Driver Code Starts
+//Initial template for C++
+
+#include <bits/stdc++.h> 
+using namespace std; 
+
+struct Node
+{
+    int data;
+    struct Node* next;
+    
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+
+void printList(Node* node) 
+{ 
+    while (node != NULL) { 
+        cout << node->data%10; 
+        node = node->next; 
+    }  
+    cout<<"\n";
+} 
+
+
+// } Driver Code Ends
+//User function template for C++
+
+/* 
+
+struct Node
+{
+    int data;
+    struct Node* next;
+    
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
+
+class Solution
+{
+    public:
+    Node* addOne(Node *head) 
+    {
+        // Your Code here
+        // return head of list after adding one
+        string x="";
+        Node* temp=head;
+        while(temp!=NULL)//collect all the node data;
+        {
+            x+=temp->data+'0';
+            temp=temp->next;
+            
+        }
+        bool f=0;
+        for(int i=x.size()-1;i>=0;i--)//add 1 in this number 
+        {
+            if(x[i]-'0'<9)
+            {
+                f=1;
+                x[i]=x[i]+1;
+                break;
+            }
+            else
+            {
+                x[i]='0';
+            }
+        }
+        if(!f)
+        {
+            x+='0';
+            x[0]='1';
+        }
+        //cout<<x<<"\n";
+        head = new Node(x[0]-'0');//new head;
+        Node* tail=head;//new tail 
+        for(int i=1;i<x.size();i++)//insert into at tail
+        {
+            tail->next=new Node(x[i]-'0');
+            tail=tail->next;
+        }
+        return head;
+        
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() 
+{ 
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        
+        Node* head = new Node( s[0]-'0' );
+        Node* tail = head;
+        for(int i=1; i<s.size(); i++)
+        {
+            tail->next = new Node( s[i]-'0' );
+            tail = tail->next;
+        }
+        Solution ob;
+        head = ob.addOne(head);
+        printList(head); 
+    }
+    return 0; 
+} 
+
+// } Driver Code Ends
