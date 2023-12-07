@@ -1,0 +1,65 @@
+class Solution
+{
+    public:
+    struct node *reverse (struct node *head, int k)
+    { 
+     // Complete this method
+     if(k==1)
+     {
+          return head;
+     }
+        node* tm=head;
+        int p=0;
+        stack<int>v;
+        node* tail; 
+        bool f=0;
+        while(tm!=NULL)
+        {
+            v.push(tm->data);
+            tm=tm->next;
+            p++;
+            if(k==p)
+            {
+                p=0;
+                if(!f){
+                 head=new node(v.top());
+                 tail=head;
+                 v.pop();
+                }
+                f=1;
+           while(!v.empty())
+           {
+               
+            tail->next=new node(v.top());
+            v.pop();
+            tail=tail->next;
+             
+               
+           }
+             
+            }
+            
+        }
+          if(!f){
+                 head=new node(v.top());
+                 tail=head;
+                 v.pop();
+                }
+                f=1;
+           while(!v.empty())
+           {
+               
+            tail->next=new node(v.top());
+            v.pop();
+            tail=tail->next;
+             
+               
+           }
+      
+        return head;
+        
+        
+        
+        
+    }
+};
