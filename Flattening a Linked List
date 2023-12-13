@@ -1,3 +1,4 @@
+
 Node *flatten(Node *root)
 {
    // Your code here
