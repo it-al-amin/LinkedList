@@ -1,0 +1,119 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+
+public:
+    int data;
+    Node *next;
+
+    Node(int data) // constructor
+    {
+        this->data = data;
+        this->next = NULL; // Use nullptr instead of NULL in modern C++
+    }
+    ~Node() // destructor
+    {
+        int val = this->data;
+        if (this->next != NULL)
+        {
+            delete next;
+            this->next = NULL;
+        }
+        cout << "Memory free with data " << val << "\n";
+    }
+};
+
+void insertNode(Node *&tail, int elelment, int val)
+{
+    if (tail == NULL) // empty list;
+    {
+        Node *temp = new Node(val);
+        tail = temp;
+        temp->next = temp;
+        return;
+    }
+    // not empty list bhen do below work
+    Node *curNode = tail;
+    while (curNode->data != elelment)
+    {
+        curNode = curNode->next;
+    }
+    Node *temp = new Node(val);
+    temp->next = curNode->next;
+    curNode->next = temp;
+}
+void deleteNode(int val, Node *&tail)
+{
+    // deleting 1st node
+    if (tail == NULL)
+    {
+        cout << "List is empty,Please check again\n";
+        return;
+    }
+    // assume the val is present in the list
+    Node *prev = tail;
+    Node *cur = prev->next;
+    if (prev == cur) // only one node the tail will be null;
+    {
+        tail = NULL;
+    }
+    while (cur->data != val)
+    {
+        prev = cur;
+        cur = cur->next;
+    }
+    prev->next = cur->next;
+    if (tail == cur) // tail will be deleted so update with prevNode;
+    {
+        tail = prev;
+    }
+    cur->next = NULL;
+    delete cur;
+}
+void print(Node *&tail) // reverse order
+{
+
+    if (tail == NULL)
+    {
+        cout << "EMPTY LIST\n";
+        return;
+    }
+
+    Node *temp = tail;
+    do
+    {
+        cout << tail->data << " ";
+        tail = tail->next;
+    } while (temp != tail);
+    cout << "\n";
+}
+int main()
+{
+    Node *tail = NULL;
+    insertNode(tail, 5, 3);
+    print(tail);
+    insertNode(tail, 3, 5);
+    print(tail);
+    // cout << tail->data << "\n";
+    insertNode(tail, 5, 7);
+    print(tail);
+    // cout << tail->data << "\n";
+    deleteNode(7, tail);
+    print(tail);
+    // cout << tail->data << "\n";
+    deleteNode(3, tail);
+    print(tail);
+    deleteNode(5, tail);
+    print(tail);
+    deleteNode(5, tail);
+    print(tail);
+    insertNode(tail, 5, 3);
+    print(tail);
+    insertNode(tail, 3, 5);
+    print(tail);
+    // cout << tail->data << "\n";
+    insertNode(tail, 5, 7);
+    print(tail);
+    return 0;
+}
