@@ -1,0 +1,34 @@
+class Solution
+{
+    public:
+    //Function to remove a loop in the linked list.
+    void removeLoop(Node* head)
+    {
+        // code here
+        // just remove the loop without losing any nodes
+        if(head==NULL)
+        {
+            return;
+        }
+        Node* tail=head;
+        set<Node*>s;
+        Node* ans=head;
+        while(tail!=NULL)
+        {
+           if(s.find(tail)==s.end())
+           {
+               ans=tail;//last one which is not yet enter into a loop
+               s.insert(tail);
+           }
+           else
+           {
+               tail=ans;//last node ka previous node
+               tail->next=NULL;//last node ka previous node ar next hobe NULL as it is now last node
+               break;
+           }
+            tail=tail->next;
+        }
+        
+        
+    }
+};
