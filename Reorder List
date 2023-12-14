@@ -29,11 +29,11 @@ public:
         }
           
           temp = new Node(p[p.size()-1]);
-          temp->next = NULL;//satrting from last node
+          temp->next = NULL;//starting from last node
           head = temp;
         for(i=p.size()-2;i>=0;i--)
         {
-              temp = new Node(p[i]);
+              temp = new Node(p[i]);//adding at head
               temp->next = head;
               head = temp;
         }
