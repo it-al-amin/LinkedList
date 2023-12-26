@@ -1,0 +1,55 @@
+class Solution
+{
+    public:
+    void rearrangeEvenOdd(Node *&head)
+    {
+       // Your Code here
+       Node * temp=head;
+       if(head==NULL)
+       {
+           return;
+       }
+       vector<int>v;
+       vector<int>p;
+       int cnt=1;
+       while(temp!=NULL)
+       {
+           if(1&cnt)
+           {
+               v.push_back(temp->data);
+           }
+           else
+           {
+               p.push_back(temp->data);
+           }
+           cnt++;
+           temp=temp->next;
+       }
+       temp=NULL;
+       for(int i=p.size()-1;i>=0;i--)
+       {
+           head=new Node(p[i]);
+           head->next=temp;
+           temp=head;
+       }
+       for(int i=v.size()-1;i>=0;i--)
+       {
+           head=new Node(v[i]);
+           head->next=temp;
+           temp=head;
+       }
+       
+       /*
+       temp=head;
+       while(temp!=NULL)
+       {
+           cout<<temp->data<<" ";
+           temp=temp->next;
+       }
+       cout<<"\n";
+      
+      */
+      
+       
+    }
+};
